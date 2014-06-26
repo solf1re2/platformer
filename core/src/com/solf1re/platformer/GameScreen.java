@@ -35,7 +35,11 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        batch.draw(Assets.spriteBack, 0, 0);
+//        batch.draw(Assets.spriteBack, 0, 0);
+        batch.draw(Assets.spriteOne, 22, 34);
+        batch.draw(Assets.spriteTwo, 234, 344);
+        batch.draw(Assets.spriteThree, 652, 444);
+        batch.draw(Assets.spriteFour, 43, 324);
 
         batch.end();
     }
