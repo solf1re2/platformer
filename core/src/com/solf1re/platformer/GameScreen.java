@@ -15,6 +15,9 @@ public class GameScreen implements Screen {
     OrthographicCamera camera;
     SpriteBatch batch;
 
+    final int spriteheight = 16;
+
+
     public GameScreen(PlatformGame game){
         this.game = game;
 
@@ -35,13 +38,23 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-//        batch.draw(Assets.spriteBack, 0, 0);
-        batch.draw(Assets.spriteOne, 22, 34);
-        batch.draw(Assets.spriteTwo, 234, 344);
-        batch.draw(Assets.spriteThree, 652, 444);
-        batch.draw(Assets.spriteFour, 43, 324);
-
+        batch.draw(Assets.spriteBack, 0, 0);
+//        batch.draw(Assets.spriteMud, 22, 34);
+//        batch.draw(Assets.spriteRock, 256, 256);
+//        batch.draw(Assets.spriteGrass, 652, 444);
+//        batch.draw(Assets.spriteGreen, 43, 324);
+        drawFloor();
         batch.end();
+    }
+
+    private void drawFloor(){
+        int floorDepth = 1080 - 128;
+        for(int i = 0; i < 1920; i += spriteheight) {
+            batch.draw(Assets.spriteGrass, i, floorDepth);
+            for(int j = spriteheight + floorDepth; j < 1080; j += spriteheight) {
+                batch.draw(Assets.spriteRock, i, j);
+            }
+        }
     }
 
     @Override
