@@ -8,8 +8,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = "My Platformer";
-        config.width = 480;
-        config.height = 320;
+        config.width = 1280;
+        config.height = 720;
+//        config.fullscreen = true;
 //        config.resizable = false;
 
 
