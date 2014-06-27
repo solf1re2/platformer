@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Created by James on 25/06/2014.
+ * Main game screen, draws on assets class for sprite loading.
  */
 public class GameScreen implements Screen {
 
@@ -22,7 +23,7 @@ public class GameScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(true,1920,1080);
+        camera.setToOrtho(false,1920,1080); // flips the Y axis
 
         batch = new SpriteBatch();
     }
@@ -42,16 +43,15 @@ public class GameScreen implements Screen {
 //        batch.draw(Assets.spriteMud, 22, 34);
 //        batch.draw(Assets.spriteRock, 256, 256);
 //        batch.draw(Assets.spriteGrass, 652, 444);
-//        batch.draw(Assets.spriteGreen, 43, 324);
         drawFloor();
         batch.end();
     }
 
     private void drawFloor(){
-        int floorDepth = 1080 - 128;
+        int floorDepth = 128;
         for(int i = 0; i < 1920; i += spriteheight) {
             batch.draw(Assets.spriteGrass, i, floorDepth);
-            for(int j = spriteheight + floorDepth; j < 1080; j += spriteheight) {
+            for(int j = 0; j < floorDepth; j += spriteheight) {
                 batch.draw(Assets.spriteRock, i, j);
             }
         }

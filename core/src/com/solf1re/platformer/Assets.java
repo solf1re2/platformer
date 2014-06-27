@@ -17,15 +17,13 @@ public class Assets {
     public static Sprite spriteMud;
     public static Sprite spriteRock;
     public static Sprite spriteGrass;
-    public static Sprite spriteGreen;
-    public static Sprite mapSprite;
 
     public static void load(){
         textureBack = new Texture(Gdx.files.internal("mainmenu/background.png"));
         textureBack.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         spriteBack = new Sprite(textureBack);   // assigns the background texture to a Sprite
-        spriteBack.flip(false, true);   // flips the background sprite on its Y axis (not on X axis)
+        spriteBack.flip(false, false);   // flips the background sprite on its Y axis (not on X axis)
 
         terrainSprites = new Texture(Gdx.files.internal("images/spritesheet_terrain.png"));
         spriteMud = new Sprite(terrainSprites, 0, 0, 16, 16);
