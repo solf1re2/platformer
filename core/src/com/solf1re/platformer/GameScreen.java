@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.Random;
+
 /**
  * Created by James on 25/06/2014.
  * Main game screen, draws on assets class for sprite loading.
@@ -15,6 +17,7 @@ public class GameScreen implements Screen {
     PlatformGame game;
     OrthographicCamera camera;
     SpriteBatch batch;
+    Random random = new Random();
 
     final int spriteheight = 16;
 
@@ -47,12 +50,23 @@ public class GameScreen implements Screen {
         batch.end();
     }
 
+    /**
+     * Method to generate the floor.
+     * Bad location - continuously drawing etc
+     */
     private void drawFloor(){
         int floorDepth = 128;
         for(int i = 0; i < 1920; i += spriteheight) {
             batch.draw(Assets.spriteGrass, i, floorDepth);
             for(int j = 0; j < floorDepth; j += spriteheight) {
-                batch.draw(Assets.spriteRock, i, j);
+                switch (random.nextInt(2)){
+                    case 0 : batch.draw(Assets.spriteRock, i, j);
+                        break;
+                    case 1 : batch.draw(Assets.spriteMud, i, j);
+                        break;
+                    default : batch.draw(Assets.spriteRock, i, j);
+                        break;
+                }
             }
         }
     }
