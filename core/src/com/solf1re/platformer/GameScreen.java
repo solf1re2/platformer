@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Random;
@@ -17,6 +18,7 @@ public class GameScreen implements Screen {
     PlatformGame game;
     OrthographicCamera camera;
     SpriteBatch batch;
+    private BitmapFont font = new BitmapFont();
     Random random = new Random();
 
     final int spriteheight = 16;
@@ -40,16 +42,22 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
 
+        renderSpriteBatches();
+    }
+
+    /**
+     * make sprite batch for render method.
+     */
+    private void renderSpriteBatches() {
         batch.begin();
 
         batch.draw(Assets.spriteBack, 0, 0);
-//        batch.draw(Assets.spriteMud, 22, 34);
-//        batch.draw(Assets.spriteRock, 256, 256);
-//        batch.draw(Assets.spriteGrass, 652, 444);
-        drawFloor();
+//        drawFloor();
+        font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
         batch.end();
     }
 
+    //TODO move method of making floor - to one time run
     /**
      * Method to generate the floor.
      * Bad location - continuously drawing etc
