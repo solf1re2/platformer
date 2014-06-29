@@ -19,11 +19,13 @@ public class LevelScreen extends GameScreen{
     @Override
     public void render(float delta) {
         super.render(delta);
+        renderSpriteBatches();
     }
 
     // TODO make menuScreen spriteBatch here, using Assets
     private void renderSpriteBatches() {
         batch.begin();
+        batch.draw(Assets.textureLevelBackground, 0, 0);
 
 //        batch.draw(Assets.spriteBack, 0, 0);
         font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 10, 20);

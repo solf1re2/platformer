@@ -1,6 +1,7 @@
 package com.solf1re.platformer.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -50,6 +51,13 @@ public abstract class GameScreen implements Screen {
         camera.update();
 
         batch.setProjectionMatrix(camera.combined);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.E))
+            game.setScreen(game.levelScreen);
+        if (Gdx.input.isKeyPressed(Input.Keys.O))
+            game.setScreen(game.settingsScreen);
+        if (Gdx.input.isKeyPressed(Input.Keys.R))
+            game.setScreen(game.mainMenuScreen);
 
 
     }

@@ -23,11 +23,6 @@ public class MainMenuScreen extends GameScreen{
         super.render(delta);
         renderSpriteBatches();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.E))
-            game.setScreen(game.levelScreen);
-        if (Gdx.input.isKeyPressed(Input.Keys.O))
-            game.setScreen(game.settingsScreen);
-
         stage.act(delta);
         stage.draw();
     }

@@ -9,17 +9,17 @@ import com.solf1re.platformer.Screens.SettingsScreen;
 public class PlatformGame extends Game{
 
 //    public GameScreen gameScreen;
-    public MainMenuScreen menuScreen;
+    public MainMenuScreen mainMenuScreen;
     public LevelScreen levelScreen;
     public SettingsScreen settingsScreen;
 
     @Override
     public void create() {
         Assets.load();
-        menuScreen = new MainMenuScreen(this);
+        mainMenuScreen = new MainMenuScreen(this);
         levelScreen = new LevelScreen(this);
         settingsScreen = new SettingsScreen(this);
 
-        setScreen(menuScreen);
+        setScreen(mainMenuScreen);
     }
 }
