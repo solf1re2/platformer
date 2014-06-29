@@ -1,4 +1,4 @@
-package com.solf1re.platformer;
+package com.solf1re.platformer.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.solf1re.platformer.Assets;
+import com.solf1re.platformer.PlatformGame;
 
 import java.util.Random;
 
@@ -13,9 +17,12 @@ import java.util.Random;
  * Created by James on 25/06/2014.
  * Main game screen, draws on assets class for sprite loading.
  */
-public class GameScreen implements Screen {
+public abstract class GameScreen implements Screen {
 
     PlatformGame game;
+
+    protected Stage stage;
+
     OrthographicCamera camera;
     SpriteBatch batch;
     private BitmapFont font = new BitmapFont();
@@ -31,6 +38,8 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false,1920,1080); // flips the Y axis
 
         batch = new SpriteBatch();
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -42,7 +51,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
 
-        renderSpriteBatches();
+
     }
 
     /**
@@ -86,11 +95,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
