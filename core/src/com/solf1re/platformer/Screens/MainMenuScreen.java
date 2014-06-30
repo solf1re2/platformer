@@ -1,6 +1,7 @@
 package com.solf1re.platformer.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,6 +22,10 @@ public class MainMenuScreen extends GameScreen{
     private BitmapFont font = new BitmapFont();
     private Skin skin;
     private Stage stage; // for UI
+    private Table table;
+//    TextButton settingsButton;
+//    TextButton playButton;
+
 
     public MainMenuScreen(PlatformGame game) {
         super(game);
@@ -49,6 +54,7 @@ public class MainMenuScreen extends GameScreen{
 
         // render stage UI
         stage.draw();
+        Table.drawDebug(stage);
         batch.end();
     }
 
@@ -56,12 +62,18 @@ public class MainMenuScreen extends GameScreen{
         // adding buttons UI
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
+        // TODO need to somehow resize viewport with the Screen, resize method not doing it...
+        stage = new Stage(new ScreenViewport());
+//        stage.getViewport().
+        table = new Table();
+        // draws line for debugging table
+        table.debug();
+
+        stage.addActor(table);
+        table.setFillParent(true);
+
         // play Button
         final TextButton playButton = new TextButton("Play", skin, "default");
-        playButton.setWidth(200f);
-        playButton.setHeight(20f);
-        playButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 + 100f);
-
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -71,9 +83,6 @@ public class MainMenuScreen extends GameScreen{
 
         //settings Button
         final TextButton settingsButton = new TextButton("Settings", skin, "default");
-        settingsButton.setWidth(200f);
-        settingsButton.setHeight(20f);
-        settingsButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 + 50f);
 
         settingsButton.addListener(new ClickListener() {
             @Override
@@ -82,15 +91,9 @@ public class MainMenuScreen extends GameScreen{
             }
         });
 
-        // TODO need to somehow resize viewport with the Screen, resize method not doing it...
-        stage = new Stage(new ScreenViewport());
-//        stage.getViewport().
-        Table table = new Table();
-        stage.addActor(table);
-        table.setFillParent(true);
-
-        table.addActor(playButton);
-        table.addActor(settingsButton);
+        table.add(playButton).size(250f, 80f).pad(20f, 0, 20f,0);
+        table.row();
+        table.add(settingsButton).size(250f, 80f).pad(20f, 0, 20f,0);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -108,6 +111,8 @@ public class MainMenuScreen extends GameScreen{
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+//        playButton.setPosition(stage.getWidth()/2 -100f, stage.getHeight() / 2 + 100f);
+//        settingsButton.setPosition(stage.getWidth()/2 -100f , stage.getHeight() / 2 + 50f);
     }
 
     @Override
