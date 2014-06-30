@@ -7,7 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.solf1re.platformer.Assets;
 import com.solf1re.platformer.PlatformGame;
@@ -21,8 +26,6 @@ import java.util.Random;
 public abstract class GameScreen implements Screen {
 
     PlatformGame game;
-
-    protected Stage stage;
 
     OrthographicCamera camera;
     SpriteBatch batch;
@@ -39,8 +42,8 @@ public abstract class GameScreen implements Screen {
         camera.setToOrtho(false,1920,1080); // flips the Y axis
 
         batch = new SpriteBatch();
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+
+
     }
 
     @Override
@@ -103,12 +106,11 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
+        batch.dispose();
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
     }
 
     @Override
