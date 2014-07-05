@@ -2,9 +2,9 @@ package com.solf1re.platformer;
 
 
 import com.badlogic.gdx.Game;
-import com.solf1re.platformer.Screens.LevelScreen;
-import com.solf1re.platformer.Screens.MainMenuScreen;
-import com.solf1re.platformer.Screens.SettingsScreen;
+import com.solf1re.platformer.screens.LevelScreen;
+import com.solf1re.platformer.screens.MainMenuScreen;
+import com.solf1re.platformer.screens.SettingsScreen;
 
 public class PlatformGame extends Game{
 

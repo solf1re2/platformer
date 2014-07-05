@@ -1,4 +1,4 @@
-package com.solf1re.platformer.Screens;
+package com.solf1re.platformer.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

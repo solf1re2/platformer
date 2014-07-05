@@ -1,4 +1,4 @@
-package com.solf1re.platformer.Screens;
+package com.solf1re.platformer.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,13 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.solf1re.platformer.Assets;
 import com.solf1re.platformer.PlatformGame;
 
@@ -31,6 +24,11 @@ public abstract class GameScreen implements Screen {
     SpriteBatch batch;
     private BitmapFont font = new BitmapFont();
     Random random = new Random();
+    public static int tileSize = 16;
+    public static int xResolution = 1920;
+    public static int yResolution = 1080;
+    public static int numberXTiles = xResolution/16;
+    public static int numberYTiles = yResolution/16;
 
     final int spriteheight = 16;
 
