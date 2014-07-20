@@ -1,4 +1,4 @@
-package com.solf1re.platformer.manager;
+package com.solf1re.platformer.levels;
 
 import com.solf1re.platformer.screens.GameScreen;
 import com.solf1re.platformer.screens.LevelScreen;
@@ -6,27 +6,29 @@ import com.solf1re.platformer.screens.LevelScreen;
 /**
  * Created by James on 05/07/2014.
  */
-public class LevelManager {
+public class LevelMap
+{
 
     private LevelScreen levelScreen;
 
     private int currentLevel = 0;
 
-    private int numberXTiles = 1080/16;
-    private int numberYTiles = 1920/16;
+    public static final int TILESIZE = 32;
+    private int numberXTiles = 1080/TILESIZE;
+    private int numberYTiles = 1920/TILESIZE;
 
     private int mapSizeX = GameScreen.numberXTiles;
     private int mapSizeY = GameScreen.numberYTiles;
 
     private  Tile[][] map;
 
-    public LevelManager(LevelScreen screen) {
+    public LevelMap(LevelScreen screen) {
         levelScreen = screen;
         map = new Tile[mapSizeX][mapSizeY];
         initMapTiles();
     }
 
-    public LevelManager(LevelScreen screen, int level) {
+    public LevelMap(LevelScreen screen, int level) {
         currentLevel = level;
         levelScreen = screen;
         map = new Tile[mapSizeX][mapSizeY];

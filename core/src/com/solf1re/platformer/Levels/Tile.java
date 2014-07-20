@@ -1,4 +1,4 @@
-package com.solf1re.platformer.manager;
+package com.solf1re.platformer.levels;
 
 /**
  * Created by James on 05/07/2014.
