@@ -1,10 +1,16 @@
 package com.solf1re.platformer.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.solf1re.platformer.Assets;
-import com.solf1re.platformer.manager.LevelManager;
 import com.solf1re.platformer.PlatformGame;
+import com.solf1re.platformer.levels.TileMap;
+import com.solf1re.platformer.manager.LevelManager;
+
+import java.util.logging.Level;
 
 /**
  * Created by James on 29/06/2014.
@@ -12,12 +18,26 @@ import com.solf1re.platformer.PlatformGame;
 public class LevelScreen extends GameScreen{
 
     private BitmapFont font = new BitmapFont();
-    private LevelManager levelMap;
+    private TiledMap levelMap;
+    private LevelManager levelManager;
+
+    int level = 1;
+
+    private OrthogonalTiledMapRenderer renderer;
 
     public LevelScreen(PlatformGame game) {
         super(game);
-        levelMap = new LevelManager(this, 1);
+        levelManager = new LevelManager();
     }
+
+    public LevelScreen(PlatformGame game, int level) {
+        super(game);
+        levelManager = new LevelManager();
+        setLevel(level);  //  loads the specified levelMap in the LevelManager
+        getLevel();  //  returns the set levelMap
+    }
+
+
 
 
 
@@ -25,6 +45,9 @@ public class LevelScreen extends GameScreen{
     public void render(float delta) {
         super.render(delta);
         renderSpriteBatches();
+
+        renderer.setView(camera);
+        renderer.render();
     }
 
     // TODO make menuScreen spriteBatch here, using Assets
@@ -47,9 +70,22 @@ public class LevelScreen extends GameScreen{
         }
     }
 
+    public void setLevel(int level) {
+        LevelManager.loadMap(level);
+    }
+
+    private void getLevel() {
+        levelMap = LevelManager.getLevelMap();
+    }
+
     @Override
     public void show() {
         super.show();
+        levelManager = new LevelManager();
+        setLevel(level);  //  loads the specified levelMap in the LevelManager
+        getLevel();  //  returns the set levelMap
+        renderer = new OrthogonalTiledMapRenderer(levelMap);
+
     }
 
     @Override
@@ -60,6 +96,7 @@ public class LevelScreen extends GameScreen{
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        camera.update();
     }
 
     @Override

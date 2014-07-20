@@ -1,12 +1,14 @@
 package com.solf1re.platformer.levels;
 
+import com.badlogic.gdx.files.FileHandle;
+import com.solf1re.platformer.manager.LevelManager;
 import com.solf1re.platformer.screens.GameScreen;
 import com.solf1re.platformer.screens.LevelScreen;
 
 /**
  * Created by James on 05/07/2014.
  */
-public class LevelMap
+public class TileMap
 {
 
     private LevelScreen levelScreen;
@@ -22,15 +24,27 @@ public class LevelMap
 
     private  Tile[][] map;
 
-    public LevelMap(LevelScreen screen) {
+    public TileMap(LevelScreen screen) {
         levelScreen = screen;
         map = new Tile[mapSizeX][mapSizeY];
         initMapTiles();
     }
 
-    public LevelMap(LevelScreen screen, int level) {
+    public TileMap(LevelScreen screen, int level) {
         currentLevel = level;
         levelScreen = screen;
+        map = new Tile[mapSizeX][mapSizeY];
+        initMapTiles();
+    }
+
+    /**
+     * USE THIS!!
+     * @param level  assigns the level which is being made
+     * @param mapFile  this is the filehandle for the file(txt?) that holds the maps shape
+     */
+    public TileMap(int level, FileHandle mapFile) {
+        //TODO add some way to read in the mapFile
+        currentLevel = level;
         map = new Tile[mapSizeX][mapSizeY];
         initMapTiles();
     }

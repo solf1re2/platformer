@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="33" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="platform1" tilewidth="32" tileheight="32" spacing="2" margin="2">
+  <image source="tpTest.png" width="342" height="36"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="60" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt1TkKACAMAEEbFfz/gxXsLbxAmYHtU4QkBAAAAADoYisvlO6PDDBtdPPcM05Y/bP2lF127uELFX1dBaxqB44=
+  </data>
+ </layer>
+</map>
