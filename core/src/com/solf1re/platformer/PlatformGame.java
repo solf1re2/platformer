@@ -18,6 +18,7 @@ public class PlatformGame extends Game{
     public void create() {
         Assets.load();
         mainMenuScreen = new MainMenuScreen(this);
+        //TODO add a level select screen
         settingsScreen = new SettingsScreen(this);
         levelScreen = new LevelScreen(this);
         LevelManager.initLevelManager();
