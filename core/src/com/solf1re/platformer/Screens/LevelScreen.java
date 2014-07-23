@@ -1,10 +1,14 @@
 package com.solf1re.platformer.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.solf1re.platformer.Assets;
 import com.solf1re.platformer.PlatformGame;
+import com.solf1re.platformer.entities.Player;
 import com.solf1re.platformer.manager.LevelManager;
 
 import java.util.logging.Level;
@@ -61,23 +66,33 @@ public class LevelScreen extends GameScreen{
     @Override
     public void render(float delta) {
         super.render(delta);
-        renderSpriteBatches();
+        camera.update();
         fps.setText(getFPSString());
+//        renderSpriteBatches();
 
+        // render the background and the player
+        renderer.getSpriteBatch().begin();
+        renderer.getSpriteBatch().draw(Assets.spriteLevelBackground, 0, 0);
+        player.draw(renderer.getSpriteBatch());
+        renderer.getSpriteBatch().end();
+
+        // render the Map
         renderer.setView(camera);
         renderer.render();
+
+        // render the HUD
+        renderHud();
     }
 
-    // TODO make menuScreen spriteBatch here, using Assets
     private void renderSpriteBatches() {
         batch.begin();
-        //TODO get background to draw!
-        batch.draw(Assets.spriteLevelBackground, 0, 0);
-        batch.draw(Assets.spriteLevelBackground, 0, 0);
+        batch.draw(Assets.spriteLevelBackground, 0, 0);;
+        batch.end();
+    }
+    private void renderHud() {
+        batch.begin();
         stage.draw();
-//        drawMap();
-//        batch.draw(Assets.spriteBack, 0, 0);
-//        update();
+//        Table.drawDebug(stage);
         batch.end();
     }
 
@@ -100,6 +115,8 @@ public class LevelScreen extends GameScreen{
         levelMap = LevelManager.getLevelMap();
     }
 
+
+    private Player player;
     @Override
     public void show() {
         super.show();
@@ -107,17 +124,22 @@ public class LevelScreen extends GameScreen{
         setLevel(level);  //  loads the specified levelMap in the LevelManager
         getLevel();  //  returns the set levelMap
         renderer = new OrthogonalTiledMapRenderer(levelMap);
-
+        player = new Player(new Sprite(new Texture("images/player.png")), (TiledMapTileLayer)levelMap.getLayers().get(0));
+        player.setPosition(18 * player.getCollisionLayer().getTileWidth(),21 * player.getCollisionLayer().getTileHeight());
     }
 
     @Override
     public void dispose() {
         super.dispose();
+        stage.dispose();
+        renderer.dispose();
+        player.getTexture().dispose();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        stage.getViewport().update(width, height, true);
         camera.update();
     }
 
@@ -136,12 +158,12 @@ public class LevelScreen extends GameScreen{
         super.resume();
     }
 
-
-
     public void hudSetup(int width, int height) {
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        fps = new Label(getFPSString(), skin);
+
         stage = new Stage(new ScreenViewport());
+
+        fps = new Label(getFPSString(), skin);
 
         table = new Table();
 

@@ -14,7 +14,6 @@ import javafx.scene.Camera;
  */
 public class Hud extends Stage {
 
-    LevelScreen levelScreen;
     public Stage stage;
     Table table;
     Skin skin;
@@ -22,28 +21,7 @@ public class Hud extends Stage {
     private ScreenViewport hudViewPort = new ScreenViewport();
 
 
-    SpriteBatch hudSpriteBatch = new SpriteBatch();
-
-    public Hud(LevelScreen levelScreen, int width, int height) {
-        this.levelScreen = levelScreen;
-        hudSetup(width, height);
-    }
-    public void hudSetup(int width, int height) {
-        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        fps = new Label(levelScreen.getFPSString(), skin);
-        stage = this;
-        this.setViewport(hudViewPort);
-
-        table = new Table();
-//        table.setPosition(0, 0);
-
-        table.debug();
-
-        stage.addActor(table);
-
-        table.setFillParent(true);
-
-        table.add(fps);
+    public Hud() {
     }
 
     public void update(SpriteBatch batch) {
